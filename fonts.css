@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'CircularStd';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./fonts/CircularStd-Book.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'CircularStd';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(./fonts/CircularStd-Medium.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'CircularStd';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(./fonts/CircularStd-Bold.ttf) format('truetype');
+}

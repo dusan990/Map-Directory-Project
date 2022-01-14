@@ -1,0 +1,427 @@
+@import url(./fonts.css);
+body {
+  margin: 0;
+  padding: 0;
+  background: #F0F2F3;
+  font-family: "CircularStd", sans-serif;
+}
+
+/* #map { position: absolute; top: 0; bottom: 0; width: 100%; } */
+main {
+  max-width: 1128px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 24px 0;
+  gap: 24px;
+}
+@media screen and (max-width: 768px) {
+  main {
+    padding: 0;
+  }
+}
+
+a {
+  font-family: Circular Std;
+  font-style: normal;
+  text-decoration: none;
+  color: #2C2C31;
+}
+
+a:visited {
+  color: inherit;
+}
+
+h3, p {
+  margin: 0;
+}
+
+h3 {
+  font-family: "Circular Std", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 24px;
+  color: #2C2C31;
+}
+
+p {
+  font-family: "CircularStd", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+#map {
+  width: 100%;
+  height: calc(100vh - 113px);
+  border-radius: 16px;
+  border: 4px solid white;
+}
+@media screen and (max-width: 768px) {
+  #map {
+    height: calc(100vh - 57px);
+    border: none;
+    border-radius: 0;
+  }
+}
+
+.mapboxgl-canvas:focus-visible {
+  border: 3px solid var(--primary);
+  outline: none;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+.geocoder {
+  position: relative;
+  width: 100%;
+  height: 56px;
+  margin-top: 4px;
+}
+
+input#mySearch {
+  height: 56px;
+  padding: 0 16px;
+  overflow: hidden;
+}
+input#mySearch:focus-visible {
+  box-shadow: inset 0px 0px 0px 2px #F2613D;
+}
+input#mySearch:focus {
+  box-shadow: inset 0px 0px 0px 2px rgba(242, 97, 61, 0.6);
+}
+
+.mapboxgl-ctrl button:not(:disabled):hover {
+  background: rgba(44, 44, 49, 0.06) !important;
+}
+
+.mapboxgl-ctrl-group {
+  background: none !important;
+  border: none;
+  border-radius: 32px !important;
+}
+
+.mapboxgl-ctrl-geolocate:focus {
+  border-radius: 32px;
+  background: rgba(44, 44, 49, 0.06) !important;
+}
+
+.mapboxgl-ctrl-geolocate-active {
+  background: red;
+}
+
+.geocoder .mapboxgl-ctrl-geocoder {
+  width: 100%;
+  max-width: 100% !important;
+  border-radius: 8px;
+}
+
+.mapboxgl-ctrl-geocoder--pin-right {
+  display: none;
+}
+
+.mapboxgl-ctrl-geocoder--suggestion .mapboxgl-ctrl-geocoder--suggestion-title,
+.mapboxgl-ctrl-geocoder--suggestion .mapboxgl-ctrl-geocoder--suggestion-address {
+  font-family: "CircularStd", sans-serif;
+}
+
+input[type=text] {
+  background-color: white;
+  border-radius: 8px;
+}
+
+input:focus {
+  border: none;
+  outline: none !important;
+}
+
+input:focus-visible {
+  outline: none;
+  box-shadow: inset 0px 0px 0px 2px #F2613D;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+aside {
+  width: 40%;
+}
+@media screen and (max-width: 768px) {
+  aside {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 57px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 1;
+  }
+}
+
+/* reset */
+button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  -webkit-appearance: none;
+  border-radius: 50%;
+}
+
+.mapboxgl-ctrl-geocoder {
+  box-shadow: none !important;
+}
+
+.icon24 {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+#userLocation {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  z-index: 2;
+  right: 8px;
+  top: 8px;
+}
+
+#userLocation .mapboxgl-ctrl {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+#userLocation button {
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+  box-sizing: content-box;
+}
+
+#userLocation button:focus-visible {
+  outline: var(--primary) solid 2px;
+  border-radius: 50%;
+  outline-style: solid;
+  box-sizing: content-box;
+  box-shadow: none;
+}
+
+#userLocation button span {
+  background-image: url(icon24-location_12.svg);
+}
+
+.button_icon {
+  position: absolute;
+  background-color: white;
+  border-radius: 8px;
+  margin: 10px;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+  display: none !important;
+}
+
+.marker {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  height: 64px;
+  width: 56px;
+  will-change: transform;
+}
+.marker::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-image: url("kauwela_pin.svg");
+  background-size: contain;
+  width: 56px;
+  height: 64px;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: scale(0.7);
+  transform-origin: bottom;
+  transition: all 0.2s ease-in-out;
+}
+.marker.active::before, .marker:focus-visible::before, .marker:hover::before {
+  transform: scale(1);
+}
+.marker.active::before {
+  transition-duration: 0.6s;
+}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+.suggestions-wrapper * {
+  font-family: "Verdana", monospace;
+}
+
+.mapboxgl-ctrl-geocoder--suggestion-title,
+.mapboxgl-ctrl-geocoder--suggestion-address {
+  font-family: "Verdana", monospace;
+}
+
+.mapboxgl-ctrl-bottom-right,
+.mapboxgl-ctrl-bottom-left {
+  display: none;
+}
+
+.card {
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.card h3,
+.card p {
+  font-family: Circular Std;
+  font-style: normal;
+  color: #2C2C31;
+  margin: 0;
+}
+
+.card p {
+  font-size: 14px;
+}
+
+.card p:not(:last-child) {
+  margin-bottom: 4px;
+}
+
+.card h3 {
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+header {
+  display: flex;
+  max-height: 40px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(44, 44, 49, 0.06);
+  background: #FFF;
+}
+
+header nav {
+  width: 1128px;
+  margin: 0 auto;
+}
+
+header nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+header a {
+  display: flex;
+  align-items: center;
+}
+
+header a svg {
+  display: block;
+}
+
+.listings {
+  border-radius: 8px;
+  margin-top: 24px;
+}
+.listings li {
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease-in-out;
+}
+.listings li a:focus-visible, .listings li a:hover {
+  border-radius: 8px !important;
+}
+.listings li a:hover {
+  box-shadow: 0px 4px 10px rgba(44, 44, 49, 0.15);
+}
+.listings li a:focus {
+  border: none;
+}
+.listings li a:focus-visible {
+  box-shadow: inset 0px 0px 0px 2px #F2613D;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+.listings li a:first-of-type {
+  border-radius: 8px 8px 0 0;
+}
+.listings li a:last-of-type {
+  border-radius: 0 0 8px 8px;
+}
+.listings li a:not(:last-of-type) {
+  border-bottom: 1px solid rgba(44, 44, 49, 0.1);
+}
+.listings li a p:nth-of-type(1) {
+  color: #56565A;
+}
+.listings li a p:nth-of-type(2) {
+  color: #808083;
+}
+
+#listings {
+  width: 100%;
+}
+
+#list {
+  display: flex;
+  position: relative;
+  top: 0;
+  width: 10000px;
+  padding: 0;
+  margin: 0;
+}
+
+#list.shifting {
+  transition: left 0.2s ease-out;
+}
+
+.list-group-item {
+  width: 100vw;
+  width: calc(100vw - 72px);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: #fff;
+  box-sizing: border-box;
+  border-radius: 2px;
+  margin: 0 12px;
+}
+.list-group-item a {
+  padding: 24px;
+}
+
+.wrapper {
+  width: 100vw;
+  position: relative;
+  left: -24px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/*# sourceMappingURL=style.css.map */
