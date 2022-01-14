@@ -157,16 +157,21 @@ aside {
 
     @media screen and (max-width: 768px) {
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: calc(100% - 57px);
+        height: 100%;
+        // position: absolute;
+        // width: 100%;
+        // height: calc(100% - 57px);
         
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: space-between;
         
-        padding: 24px;
-        box-sizing: border-box;
-        overflow: hidden;
+        // padding: 24px;
+        // box-sizing: border-box;
+        // overflow: hidden;
 
         // z-index: 1;
     }

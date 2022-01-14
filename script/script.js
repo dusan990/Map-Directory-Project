@@ -249,7 +249,7 @@ function slide(wrapper, items, prev, next) {
         posX2 = 0,
         posInitial,
         posFinal,
-        threshold = 100,
+        threshold = 10,
         slides = items.getElementsByClassName('list-group-item'),
         slidesLength = slides.length,
         slideSize = items.getElementsByClassName('list-group-item')[0].offsetWidth,
