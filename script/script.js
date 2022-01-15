@@ -42,17 +42,6 @@ const stores = {
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
-                'coordinates': [20.405, 44.805]
-            },
-            'properties': {
-                'title': 'Kauwela Delta',
-                'address': 'Jurija Gagarina 16, Beograd'
-            }
-        },
-        {
-            'type': 'Feature',
-            'geometry': {
-                'type': 'Point',
                 'coordinates': [20.469, 44.800]
             },
             'properties': {
@@ -63,12 +52,23 @@ const stores = {
         {
             'type': 'Feature',
             'geometry': {
-            'type': 'Point',
-            'coordinates': [20.409, 44.825]
+                'type': 'Point',
+                'coordinates': [20.409, 44.825]
             },
             'properties': {
-            'title': 'Fontanta',
-            'address': 'Narodnih heroja 7, Beograd'
+                'title': 'Fontanta',
+                'address': 'Narodnih heroja 7, Beograd'
+            }
+        },
+        {
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [20.405, 44.805]
+            },
+            'properties': {
+                'title': 'Kauwela Delta',
+                'address': 'Jurija Gagarina 16, Beograd'
             }
         },
         {
@@ -111,22 +111,22 @@ function addMarkers() {
             .setLngLat(marker.geometry.coordinates)
             .addTo(map);
 
-        el.addEventListener('click', (e) => {
-            /* Fly to the point */
-            flyToStore(marker);
-            /* Close all other popups and display popup for clicked store */
-            // createPopUp(marker);
-            /* Highlight listing in sidebar */
-            const activeItem = document.getElementsByClassName('active');
-            e.stopPropagation();
-            if (activeItem[0]) {
-                activeItem[0].classList.remove('active');
-            }
-            const listing = document.getElementById(
-                `listing-${marker.properties.id}`
-            );
-            listing.classList.add('active');
-        });
+        // el.addEventListener('click', (e) => {
+        //     /* Fly to the point */
+        //     flyToStore(marker);
+        //     /* Close all other popups and display popup for clicked store */
+        //     // createPopUp(marker);
+        //     /* Highlight listing in sidebar */
+        //     const activeItem = document.getElementsByClassName('active');
+        //     e.stopPropagation();
+        //     if (activeItem[0]) {
+        //         activeItem[0].classList.remove('active');
+        //     }
+        //     const listing = document.getElementById(
+        //         `listing-${marker.properties.id}`
+        //     );
+        //     listing.classList.add('active');
+        // });
     }
 }
 
@@ -188,28 +188,34 @@ function buildLocationList(stores) {
         const address = listing.appendChild(document.createElement('p'));
         address.innerHTML = `${store.properties.address}`;
         
-        //hover the cards on aside
-        listing.addEventListener('touchend', markerflyTo);
-        listing.addEventListener('mouseover', markerflyTo);
-        function markerflyTo() {
-            for (const feature of stores.features) {
-                if (this.id === `listing-${feature.properties.id}`) {
-                    flyToStore(feature);
-                    // createPopUp(feature);
-                }
-            }
+        listing.addEventListener("touchend", function() {
+            setTimeout(() => {
                 
-            const activeItem = document.getElementsByClassName('active');
-            // stopPropagation();
-            if (activeItem[0]) {
-                activeItem[0].classList.remove('active');
-            }
-            const marker = document.getElementById(
-                `marker-${store.properties.id}`
-            );
-            marker.classList.add('active');
-            // this.parentNode.classList.add('active');
-        };
+                function isScrolledIntoView(elem) {
+                    var docViewTop = $(window).scrollTop();
+                    var docViewBottom = docViewTop + $(window).width();
+                    
+                    var elemTop = $(elem).offset().left;
+                    var elemBottom = elemTop + $(elem).width();
+                    if (((elemBottom <= docViewBottom) && (elemTop >= docViewTop))) {
+                        // console.log(elem[0].id)
+                        return elem[0].id;
+                    }
+                }
+                for (const i of listingarr) {
+                    // console.log(isScrolledIntoView([i]))
+                    for (const feature of stores.features) {
+                        if (isScrolledIntoView([i]) === `listing-${feature.properties.id}`) {
+                            flyToStore(feature);
+                        }
+                    }            
+                }
+            }, 1000);
+        });
+        
+        // function markerflyTo() {
+            
+        // };
     }
 }
 buildLocationList(stores);
@@ -260,12 +266,13 @@ function slide(wrapper, items, prev, next) {
         index = 0,
         allowShift = true;
     
+        
     // Clone first and last slide
     items.appendChild(cloneFirst);
     items.insertBefore(cloneLast, firstSlide);
     wrapper.classList.add('loaded');
     
-    const slide = [...document.getElementsByClassName('list-group-item')]
+    const slide = [...document.getElementsByClassName('item')]
     const oneSlideWidth = slide[0].offsetWidth;
     const slidelength = slide.length;
     const sliderItemsWidth = oneSlideWidth * slidelength;
@@ -290,7 +297,7 @@ function slide(wrapper, items, prev, next) {
     items.addEventListener('transitionend', checkIndex);
     
     function dragStart (e) {
-        console.log("dragstart")
+        // console.log("dragstart")
         e = e || window.event;
         e.preventDefault();
         posInitial = items.offsetLeft;
@@ -305,7 +312,7 @@ function slide(wrapper, items, prev, next) {
     }
     
     function dragAction (e) {
-        console.log("dragaction")
+        // console.log("dragaction")
         e = e || window.event;
         
         if (e.type == 'touchmove') {
@@ -319,7 +326,7 @@ function slide(wrapper, items, prev, next) {
     }
         
     function dragEnd (e) {
-        console.log("dragend")
+        // console.log("dragend")
         posFinal = items.offsetLeft;
         if (posFinal - posInitial < -threshold) {
             shiftSlide(1, 'drag');
@@ -341,11 +348,12 @@ function slide(wrapper, items, prev, next) {
 
             if (dir == 1) {
                 items.style.left = (posInitial - slideSize) + "px";
-                console.log(posInitial - slideSize)
+                // console.log(posInitial - slideSize)
                 index++;
+                // console.log(index)
             } else if (dir == -1) {
                 items.style.left = (posInitial + slideSize) + "px";
-                console.log(items.style.left = (posInitial + slideSize))
+                // console.log(items.style.left = (posInitial + slideSize))
                 index--;
             }
         };

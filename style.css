@@ -384,23 +384,25 @@ header a svg {
 #listings {
   width: 100%;
 }
-
-#list {
+#listings #list {
   display: flex;
-  position: relative;
-  top: 0;
-  width: 10000px;
-  padding: 0;
+  flex-direction: column;
   margin: 0;
+  padding: 0;
+  width: 100%;
 }
-
-#list.shifting {
+@media screen and (max-width: 768px) {
+  #listings #list {
+    width: 10000px;
+    flex-direction: row;
+    position: relative;
+    top: 0;
+  }
+}
+#listings #list.shifting {
   transition: left 0.2s ease-out;
 }
-
-.list-group-item {
-  width: 100vw;
-  width: calc(100vw - 72px);
+#listings #list .list-group-item {
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -409,18 +411,55 @@ header a svg {
   background: #fff;
   box-sizing: border-box;
   border-radius: 2px;
-  margin: 0 12px;
 }
-.list-group-item a {
+@media screen and (max-width: 768px) {
+  #listings #list .list-group-item {
+    width: calc(100vw - 72px);
+    margin: 0 12px;
+  }
+}
+#listings #list .list-group-item a {
   padding: 24px;
 }
 
+.control {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50px;
+  margin-top: -20px;
+  z-index: 2;
+}
+
+.prev,
+.next {
+  background-size: 22px;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
 .wrapper {
-  width: 100vw;
-  position: relative;
-  left: -24px;
-  overflow: hidden;
-  z-index: 1;
+  width: 100%;
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 100vw;
+    position: relative;
+    left: -24px;
+    overflow: hidden;
+    z-index: 1;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
