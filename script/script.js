@@ -94,12 +94,9 @@ map.on('load', () => {
         'type': 'geojson',
         'data': stores
     });
-
-    // add all the things to the page: list, marker
     addMarkers();
 });
 
-//add marker to the map for every store
 function addMarkers() {
     for (const marker of stores.features) {
         const el = document.createElement('div');
@@ -187,38 +184,36 @@ function buildLocationList(stores) {
         
         const address = listing.appendChild(document.createElement('p'));
         address.innerHTML = `${store.properties.address}`;
+
+        
         
         listing.addEventListener("touchend", function() {
             setTimeout(() => {
-                
                 function isScrolledIntoView(elem) {
                     var docViewTop = $(window).scrollTop();
                     var docViewBottom = docViewTop + $(window).width();
-                    
+
                     var elemTop = $(elem).offset().left;
                     var elemBottom = elemTop + $(elem).width();
                     if (((elemBottom <= docViewBottom) && (elemTop >= docViewTop))) {
-                        // console.log(elem[0].id)
                         return elem[0].id;
                     }
                 }
+                const listingarr = [...document.getElementsByClassName('item')]
                 for (const i of listingarr) {
-                    // console.log(isScrolledIntoView([i]))
                     for (const feature of stores.features) {
                         if (isScrolledIntoView([i]) === `listing-${feature.properties.id}`) {
+                            console.log('dsds')
                             flyToStore(feature);
                         }
                     }            
                 }
-            }, 1000);
+            }, 200);
         });
-        
-        // function markerflyTo() {
-            
-        // };
     }
 }
 buildLocationList(stores);
+
 
 //smooth flyover to marker
 function flyToStore(currentFeature) {
@@ -244,13 +239,10 @@ function flyToStore(currentFeature) {
 //     .addTo(map);
 // }
 
-
 var slider = document.getElementById('listings'),
-sliderItems = document.getElementById('list'),
-prev = document.getElementById('prev'),
-next = document.getElementById('next');
-
-function slide(wrapper, items, prev, next) {
+    sliderItems = document.getElementById('list');
+    
+function slide(wrapper, items) {
     var posX1 = 0,
         posX2 = 0,
         posInitial,
@@ -266,8 +258,6 @@ function slide(wrapper, items, prev, next) {
         index = 0,
         allowShift = true;
     
-        
-    // Clone first and last slide
     items.appendChild(cloneFirst);
     items.insertBefore(cloneLast, firstSlide);
     wrapper.classList.add('loaded');
@@ -279,25 +269,14 @@ function slide(wrapper, items, prev, next) {
     sliderItems.style.width = sliderItemsWidth + 'px';
     sliderItems.style.left = '-' + (slide[0].offsetWidth - 12) + 'px';
     
-    // sliderItems.style.left = '-' + (slide[0].offsetWidth - 8)+ 'px';
-
-    // Mouse events
-    items.onmousedown = dragStart;
     
-    // Touch events
+    items.onmousedown = dragStart;
     items.addEventListener('touchstart', dragStart);
     items.addEventListener('touchend', dragEnd);
     items.addEventListener('touchmove', dragAction);
-    
-    // Click events
-    prev.addEventListener('click', function () { shiftSlide(-1) });
-    next.addEventListener('click', function () { shiftSlide(1) });
-    
-    // Transition events
     items.addEventListener('transitionend', checkIndex);
     
     function dragStart (e) {
-        // console.log("dragstart")
         e = e || window.event;
         e.preventDefault();
         posInitial = items.offsetLeft;
@@ -312,7 +291,6 @@ function slide(wrapper, items, prev, next) {
     }
     
     function dragAction (e) {
-        // console.log("dragaction")
         e = e || window.event;
         
         if (e.type == 'touchmove') {
@@ -326,7 +304,6 @@ function slide(wrapper, items, prev, next) {
     }
         
     function dragEnd (e) {
-        // console.log("dragend")
         posFinal = items.offsetLeft;
         if (posFinal - posInitial < -threshold) {
             shiftSlide(1, 'drag');
@@ -348,12 +325,9 @@ function slide(wrapper, items, prev, next) {
 
             if (dir == 1) {
                 items.style.left = (posInitial - slideSize) + "px";
-                // console.log(posInitial - slideSize)
                 index++;
-                // console.log(index)
             } else if (dir == -1) {
                 items.style.left = (posInitial + slideSize) + "px";
-                // console.log(items.style.left = (posInitial + slideSize))
                 index--;
             }
         };
@@ -378,4 +352,4 @@ function slide(wrapper, items, prev, next) {
     }
 }
 
-slide(slider, sliderItems, prev, next);
+slide(slider, sliderItems);
