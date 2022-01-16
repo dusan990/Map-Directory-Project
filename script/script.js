@@ -98,6 +98,7 @@ map.on('load', () => {
 });
 
 function addMarkers() {
+    const list = document.getElementById('list-group-item');
     for (const marker of stores.features) {
         const el = document.createElement('div');
         el.id = `marker-${marker.properties.id}`;
@@ -107,25 +108,26 @@ function addMarkers() {
         new mapboxgl.Marker(el, { offset: [0, -23] })
             .setLngLat(marker.geometry.coordinates)
             .addTo(map);
-
-        // el.addEventListener('click', (e) => {
-        //     /* Fly to the point */
-        //     flyToStore(marker);
-        //     /* Close all other popups and display popup for clicked store */
-        //     // createPopUp(marker);
-        //     /* Highlight listing in sidebar */
-        //     const activeItem = document.getElementsByClassName('active');
-        //     e.stopPropagation();
-        //     if (activeItem[0]) {
-        //         activeItem[0].classList.remove('active');
-        //     }
-        //     const listing = document.getElementById(
-        //         `listing-${marker.properties.id}`
-        //     );
-        //     listing.classList.add('active');
-        // });
+            
+        el.addEventListener('click', (e) => {
+            /* Fly to the point */
+            flyToStore(marker);
+            /* Close all other popups and display popup for clicked store */
+            // createPopUp(marker);
+            /* Highlight listing in sidebar */
+            const activeItem = document.getElementsByClassName('active');
+            e.stopPropagation();
+            if (activeItem[0]) {
+                activeItem[0].classList.remove('active');
+            }
+            const listing = document.getElementById(
+                `listing-${marker.properties.id}`
+            );
+            listing.classList.add('active');
+        });
     }
 }
+
 
 function buildLocationList(stores) {
     for (const store of stores.features) {
@@ -186,7 +188,6 @@ function buildLocationList(stores) {
         address.innerHTML = `${store.properties.address}`;
 
         
-        
         listing.addEventListener("touchend", function() {
             setTimeout(() => {
                 function isScrolledIntoView(elem) {
@@ -195,20 +196,31 @@ function buildLocationList(stores) {
 
                     var elemTop = $(elem).offset().left;
                     var elemBottom = elemTop + $(elem).width();
+
                     if (((elemBottom <= docViewBottom) && (elemTop >= docViewTop))) {
                         return elem[0].id;
                     }
                 }
+                
                 const listingarr = [...document.getElementsByClassName('item')]
                 for (const i of listingarr) {
                     for (const feature of stores.features) {
                         if (isScrolledIntoView([i]) === `listing-${feature.properties.id}`) {
-                            console.log('dsds')
+                            getActiveItem(`marker-${feature.properties.id}`);
                             flyToStore(feature);
                         }
-                    }            
+                    }
                 }
             }, 200);
+        });
+
+        listing.addEventListener("mouseover", function() {
+            for (const feature of stores.features) {
+                if (this.id === `listing-${feature.properties.id}`) {
+                    flyToStore(feature);
+                }
+            }
+            getActiveItem(`marker-${store.properties.id}`);
         });
     }
 }
@@ -242,7 +254,7 @@ function flyToStore(currentFeature) {
 var slider = document.getElementById('listings'),
     sliderItems = document.getElementById('list');
     
-function slide(wrapper, items) {
+const slide = (wrapper, items) => {
     var posX1 = 0,
         posX2 = 0,
         posInitial,
@@ -352,4 +364,20 @@ function slide(wrapper, items) {
     }
 }
 
-slide(slider, sliderItems);
+function mobileMediaQuery() {
+    if (window.matchMedia("(max-width: 768px)").matches) { // If media query matches
+        slide(slider, sliderItems);
+    }
+}
+
+mobileMediaQuery()
+
+
+function getActiveItem(item) {
+    const activeItem = document.getElementsByClassName('active');
+    // stopPropagation();
+    if (activeItem[0]) {
+        activeItem[0].classList.remove('active');
+    }
+    document.getElementById(item).classList.add('active');
+}

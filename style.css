@@ -188,7 +188,6 @@ button {
   right: 8px;
   top: 8px;
 }
-
 #userLocation .mapboxgl-ctrl {
   width: 100%;
   height: 100%;
@@ -198,14 +197,12 @@ button {
   overflow: hidden;
   border-radius: 32px;
 }
-
 #userLocation button {
   width: 24px;
   height: 24px;
   padding: 8px;
   box-sizing: content-box;
 }
-
 #userLocation button:focus-visible {
   outline: var(--primary) solid 2px;
   border-radius: 50%;
@@ -213,7 +210,6 @@ button {
   box-sizing: content-box;
   box-shadow: none;
 }
-
 #userLocation button span {
   background-image: url(icon24-location_12.svg);
 }
@@ -253,7 +249,7 @@ button {
   transition: all 0.2s ease-in-out;
 }
 .marker.active::before, .marker:focus-visible::before, .marker:hover::before {
-  transform: scale(1);
+  transform: scale(1.2);
 }
 .marker.active::before {
   transition-duration: 0.6s;
@@ -318,12 +314,10 @@ header {
   border-bottom: 1px solid rgba(44, 44, 49, 0.06);
   background: #FFF;
 }
-
 header nav {
   width: 1128px;
   margin: 0 auto;
 }
-
 header nav ul {
   display: flex;
   align-items: center;
@@ -332,68 +326,30 @@ header nav ul {
   margin: 0;
   padding: 0;
 }
-
-header a {
+header nav ul a {
   display: flex;
   align-items: center;
 }
-
-header a svg {
+header nav ul a svg {
   display: block;
-}
-
-.listings {
-  border-radius: 8px;
-  margin-top: 24px;
-}
-.listings li {
-  display: flex;
-  flex-direction: column;
-  transition: all 0.2s ease-in-out;
-}
-.listings li a:focus-visible, .listings li a:hover {
-  border-radius: 8px !important;
-}
-.listings li a:hover {
-  box-shadow: 0px 4px 10px rgba(44, 44, 49, 0.15);
-}
-.listings li a:focus {
-  border: none;
-}
-.listings li a:focus-visible {
-  box-shadow: inset 0px 0px 0px 2px #F2613D;
-  outline: none;
-  transition: all 0.2s ease-in-out;
-}
-.listings li a:first-of-type {
-  border-radius: 8px 8px 0 0;
-}
-.listings li a:last-of-type {
-  border-radius: 0 0 8px 8px;
-}
-.listings li a:not(:last-of-type) {
-  border-bottom: 1px solid rgba(44, 44, 49, 0.1);
-}
-.listings li a p:nth-of-type(1) {
-  color: #56565A;
-}
-.listings li a p:nth-of-type(2) {
-  color: #808083;
 }
 
 #listings {
   width: 100%;
 }
 #listings #list {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 0;
+  margin: 24px 0 0 0;
   padding: 0;
-  width: 100%;
+  border-radius: 8px;
+  background: white;
 }
 @media screen and (max-width: 768px) {
   #listings #list {
     width: 10000px;
+    background: none;
     flex-direction: row;
     position: relative;
     top: 0;
@@ -402,51 +358,63 @@ header a svg {
 #listings #list.shifting {
   transition: left 0.2s ease-out;
 }
-#listings #list .list-group-item {
+#listings #list li {
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  background: #fff;
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: 8px;
 }
 @media screen and (max-width: 768px) {
-  #listings #list .list-group-item {
+  #listings #list li {
     width: calc(100vw - 72px);
     margin: 0 12px;
   }
 }
-#listings #list .list-group-item a {
+#listings #list li a {
   padding: 24px;
+  transition: all 0.2s ease-in-out;
 }
-
-.control {
-  position: absolute;
-  top: 50%;
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  border-radius: 50px;
-  margin-top: -20px;
-  z-index: 2;
+@media screen and (max-width: 768px) {
+  #listings #list li a {
+    background: white;
+  }
 }
-
-.prev,
-.next {
-  background-size: 22px;
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
+#listings #list li a:focus-visible, #listings #list li a:hover {
+  border-radius: 8px !important;
 }
-
-.prev {
-  left: 0;
+#listings #list li a:hover {
+  box-shadow: 0px 4px 10px rgba(44, 44, 49, 0.15);
 }
-
-.next {
-  right: 0;
+#listings #list li a:focus {
+  border: none;
+}
+#listings #list li a:focus-visible {
+  box-shadow: inset 0px 0px 0px 2px #F2613D;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+#listings #list li a:first-of-type {
+  border-radius: 8px 8px 0 0;
+}
+#listings #list li a:last-of-type {
+  border-radius: 0 0 8px 8px;
+}
+@media screen and (max-width: 768px) {
+  #listings #list li a:last-of-type {
+    border-radius: 8px;
+  }
+}
+#listings #list li a:not(:last-of-type) {
+  border-bottom: 1px solid rgba(44, 44, 49, 0.1);
+}
+#listings #list li a p:nth-of-type(1) {
+  color: #56565A;
+}
+#listings #list li a p:nth-of-type(2) {
+  color: #808083;
 }
 
 .wrapper {

@@ -198,31 +198,34 @@ button {
     z-index: 2;
     right: 8px;
     top: 8px;
-}
-#userLocation .mapboxgl-ctrl {
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    overflow: hidden;
-    border-radius: 32px;
-}
-#userLocation button {
-    width: 24px;
-    height: 24px;
-    padding: 8px;
-    box-sizing: content-box;
-}
-#userLocation button:focus-visible {
-    outline: var(--primary) solid 2px;
-    border-radius: 50%;
-    outline-style: solid;
-    box-sizing: content-box;
-    box-shadow: none;
-}
-#userLocation button span {
-    background-image: url(icon24-location_12.svg);
+    
+    .mapboxgl-ctrl {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        overflow: hidden;
+        border-radius: 32px;
+    }
+    button {
+        width: 24px;
+        height: 24px;
+        padding: 8px;
+        box-sizing: content-box;
+
+        &:focus-visible {
+            outline: var(--primary) solid 2px;
+            border-radius: 50%;
+            outline-style: solid;
+            box-sizing: content-box;
+            box-shadow: none;
+        }
+
+        span {
+            background-image: url(icon24-location_12.svg);
+        }
+    }
 }
 
 .button_icon {
@@ -265,7 +268,7 @@ button {
     &:focus-visible,
     &:hover {
         &::before {
-            transform: scale(1);
+            transform: scale(1.2);
         }
     }
     &.active {
@@ -327,195 +330,46 @@ header {
     padding: 8px 0;
     border-bottom: 1px solid rgba(44, 44, 49, 0.06);
     background: #FFF;
-}
 
-header nav {
-    width: 1128px;
-    margin: 0 auto;
-}
-header nav ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
+    nav {
+        width: 1128px;
+        margin: 0 auto;
 
-header a {
-    display: flex;
-    align-items: center;
-}
-header a svg {
-    display: block;
-}
+        ul {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
 
+            a {
+                display: flex;
+                align-items: center;
 
-.listings {
-    // background: #FFF;
-    // box-shadow: $shadow_short;
-    border-radius: 8px;
-    margin-top: 24px;
-    // overflow: hidden;
-
-    // @media screen and (max-width: 768px) {
-    //     position: absolute;
-    //     left: 24px;
-    //     bottom: 24px;
-    //     display: flex;
-    //     flex-direction: row;
-    //     gap: 24px;
-    //     z-index: 1;
-    //     background: none;
-    //     box-shadow: none;
-    // }
-    
-    li {
-        display: flex;
-        flex-direction: column;
-        // gap: 2px;
-        // padding: 24px;
-        // margin-bottom: 1px;
-        
-        // background: #fff;
-        // box-shadow: $shadow_short;
-        
-        transition: all .2s ease-in-out;
-
-        // @media screen and (max-width: 768px) {
-        //     width: calc(100vw - 96px);
-        //     background: white;
-        //     border-bottom: none;
-        // }
-
-        a {
-            
-            &:focus-visible,
-            &:hover {
-                border-radius: 8px!important;
-            }
-            
-            &:hover {
-                box-shadow: $shadow_long;
-            }
-            
-            &:focus {
-                border: none;
-            }
-    
-            &:focus-visible {
-                box-shadow: $shadow_focus;
-                outline: none;
-                transition: all .2s ease-in-out;
-            }
-    
-            &:first-of-type {
-                border-radius: 8px 8px 0 0;
-            }
-            &:last-of-type {
-                border-radius: 0 0 8px 8px;
-            }
-            &:not(:last-of-type) {
-                border-bottom: 1px solid rgba($color: #2C2C31, $alpha: 0.1);
-            }
-    
-            p:nth-of-type(1) {
-                color: $body80;
-            }
-            p:nth-of-type(2) {
-                color: $body60;
+                svg {
+                    display: block;
+                }
             }
         }
-        
     }
 }
 
-// #listings {
-
-//     ul {
-//         width: 100%;
-//         display: flex;
-//         flex-direction: column;
-//         // gap: 24px;
-//         list-style: none;
-//         margin: 0;
-//         padding: 0;
-
-//         li {
-//             // float: left;
-//             // display: block;
-//             margin: 0;
-//             text-align: left;
-            
-//             a {
-//                 display: flex;
-//                 flex-direction: column;
-//                 gap: 2px;
-//                 padding: 24px;
-//                 box-sizing: border-box;
-//                 background: white;
-//             }
-
-//             img { /* CSS for images within gallery */
-//                 max-width: 100%; /* make each image responsive, so its native width can occupy up to 100% of gallery's width, but not beyond */
-//                 height: auto;
-//             }
-//         }
-//     }
-// }
-// @media screen and (max-width: 768px) {
-//     #listings {
-//         display: flex;
-//         // flex-direction: row;
-//         align-items: flex-end;
-//         // overflow: hidden;
-//         margin: 0 auto;
-//         padding: 0;
-//         box-sizing: border-box;
-        
-        
-//         background: none;
-//         box-shadow: none;
-        
-//         z-index: 1;
-        
-//         ul {
-//             position: relative;
-//             // left: 0;
-//             display: flex;
-//             flex-direction: row;
-//             // gap: 24px;
-//             transition: all .1s ease-in-out;
-//             // overflow: hidden;
-
-//             li {
-//                 width: calc(100vw - 48px);
-//                 padding-left: 24px;
-//                 box-sizing: border-box;
-//                 // width: 100vw;
-//                 // margin: 0 0 0 24px;
-
-//                 &:first-of-type {
-//                     margin-left: 0;
-//                 }
-//             }
-//         }
-//     }
-// }
-
-
 #listings {
     width: 100%;
-
+    
     #list {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        margin: 0;
+        margin: 24px 0 0 0;
         padding: 0;
-        width: 100%;
+        border-radius: 8px;
+        background: white;
     
         @media screen and (max-width: 768px) {
             width: 10000px;
+            background: none;
             flex-direction: row;
             position: relative;
             top: 0;
@@ -524,25 +378,69 @@ header a svg {
         &.shifting {
           transition: left .2s ease-out;
         }
-        .list-group-item {
+        
+        li {
             cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: center;
             position: relative;
-            background: #fff;
-            // padding: 24px;
+
             box-sizing: border-box;
-            border-radius: 2px;
-            //   margin: 0 0 0 24px;
+            border-radius: 8px;
             
             @media screen and (max-width: 768px) {
                 width: calc(100vw - 72px);
                 margin: 0 12px;
             }
-            
+
             a {
                 padding: 24px;
+                transition: all .2s ease-in-out;
+
+                @media screen and (max-width: 768px) {
+                    background: white;
+                }
+            
+                &:focus-visible,
+                &:hover {
+                    border-radius: 8px!important;
+                }
+                
+                &:hover {
+                    box-shadow: $shadow_long;
+                }
+                
+                &:focus {
+                    border: none;
+                }
+        
+                &:focus-visible {
+                    box-shadow: $shadow_focus;
+                    outline: none;
+                    transition: all .2s ease-in-out;
+                }
+        
+                &:first-of-type {
+                    border-radius: 8px 8px 0 0;
+                }
+                &:last-of-type {
+                    border-radius: 0 0 8px 8px;
+
+                    @media screen and (max-width: 768px) {
+                        border-radius: 8px;
+                    }
+                }
+                &:not(:last-of-type) {
+                    border-bottom: 1px solid rgba($color: #2C2C31, $alpha: 0.1);
+                }
+        
+                p:nth-of-type(1) {
+                    color: $body80;
+                }
+                p:nth-of-type(2) {
+                    color: $body60;
+                }
             }
         }
     }
@@ -556,8 +454,6 @@ header a svg {
         position: relative;
         left: -24px;
         overflow: hidden;
-        // width: $slider-width;
-        // height: $slider-height;
         z-index: 1;
     }
 }
