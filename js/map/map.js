@@ -191,15 +191,27 @@ function functionMap() {
             
             listing.addEventListener("touchend", function() {
                 setTimeout(() => {
-                    function isScrolledIntoView(elem) {
-                        var docViewTop = $(window).scrollTop();
-                        var docViewBottom = docViewTop + $(window).width();
+                    // function isScrolledIntoView(elem) {
+                    //     var windowTop = window.offsetTop;
+                    //     console.log(window.offsetTop)
+                    //     var windowBottom = windowTop + window.offsetWidth;
+                    //     var elemTop = elem.offsetLeft;
+                    //     var elemBottom = elemTop + elem.offsetWidth;
     
-                        var elemTop = $(elem).offset().left;
-                        var elemBottom = elemTop + $(elem).width();
+                    //     if (((elemBottom <= windowBottom) && (elemTop >= windowTop))) {
+                    //         return elem[0].id;
+                    //     }
+                    // }
+
+                    function isScrolledIntoView(element) {
+                        var docViewTop = window.pageYOffset;
+                        var docViewBottom = docViewTop + window.innerWidth;
+                        var elementTop = window.innerWidth - element[0].getBoundingClientRect().right;
+                        var elementBottom = elementTop + element[0].offsetWidth;
+                        
     
-                        if (((elemBottom <= docViewBottom) && (elemTop >= docViewTop))) {
-                            return elem[0].id;
+                        if (((elementBottom <= docViewBottom) && (elementTop >= docViewTop))) {
+                            return element[0].id;
                         }
                     }
                     
