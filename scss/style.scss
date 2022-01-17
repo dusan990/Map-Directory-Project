@@ -1,4 +1,4 @@
-@import url(./fonts.css);
+@import url('./fonts.scss');
 
 $cl_primary: #F2613D;
 $cl_primary06: rgba(#F2613D, 0.6);
@@ -14,14 +14,18 @@ $shadow_long: 0px 4px 10px rgba(44, 44, 49, 0.15);
 $shadow_focus: inset 0px 0px 0px 2px $cl_primary;
 $shadow_input: inset 0px 0px 0px 2px $cl_primary06;
 
+html {
+    height: -webkit-fill-available;
+}
+
 body { 
     margin: 0; 
     padding: 0;
     background: #F0F2F3;
     font-family: $primary-font;
-    // height: 4000px;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
 }
-/* #map { position: absolute; top: 0; bottom: 0; width: 100%; } */
 
 main {
     max-width: 1128px;
@@ -223,7 +227,7 @@ button {
         }
 
         span {
-            background-image: url(icon24-location_12.svg);
+            background-image: url('../assets/icon24-location_12.svg');
         }
     }
 }
@@ -252,7 +256,7 @@ button {
         position: absolute;
         bottom: 0;
         left: 0;
-        background-image: url('kauwela_pin.svg');
+        background-image: url('../assets/kauwela_pin.svg');
         background-size: contain;
         width: 56px;
         height: 64px;
